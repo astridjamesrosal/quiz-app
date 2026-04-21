@@ -1,3 +1,5 @@
+import json
+
 questions = [
     {
         "question": "This is the brain of the computer and is responsible for carrying out instructions and running calculations.",
@@ -90,3 +92,24 @@ def show_results(score):
     else:
         print("Great Job!")
     save_score(score)
+
+while True:
+    choice = input("Hello, would you like to take a 10-item quiz about Information Technology and Computer Science topics?(Yes/No) ")
+    if choice == "Yes":
+        score = show_questions()
+        show_results(score)
+        while True:
+            again = input("Take the quiz again?(Yes/No): ")
+            if again == "Yes":
+                score = show_questions()
+                show_results(score)
+            elif again == "No":
+                print("Have a great day!")
+                exit()
+            else:
+                print("Invalid choice, please type a valid answer")
+    elif choice == "No":
+        print("Have a great day!")
+        exit()
+    else:
+        print("Invalid choice, please type a valid answer")
