@@ -58,7 +58,7 @@ def load_score():
         with open("scores.json", "r") as f:
             return json.load(f)
         
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         return {"score": 0}    
     
 def save_score(score):
