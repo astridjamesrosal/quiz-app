@@ -78,3 +78,15 @@ def show_questions():
         if answer == question['answer']:
             score += 1
     return score
+
+def show_results(score):
+    previous_score = load_score()["score"]
+    print(f"Previous Score: {previous_score}/10")
+    print(f"Score: {score}/10")
+    if previous_score > score:
+        print("Nice Try, Keep studying")
+    elif previous_score == score:
+        print("Keep improving!")
+    else:
+        print("Great Job!")
+    save_score(score)
