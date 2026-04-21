@@ -51,5 +51,14 @@ questions = [
     }
 ]
 
-
+def load_score():
+    try:
+        with open("scores.json", "r") as f:
+            return json.load(f)
+        
+    except FileNotFoundError
+        return {"score": 0}    
     
+def save_score(score):
+    with open("scores.json", "w") as f:
+        json.dump({"score": score}, f)
