@@ -1,6 +1,6 @@
-import json
+import json        #Imports the JSON module to enable saving and loading the score between sessions.
 
-questions = [
+questions = [      #List of Dictionaries. Each Dictionary holds the question, choices, and answer.
     {
         "question": "This is the brain of the computer and is responsible for carrying out instructions and running calculations.",
         "choices": ["A. Random Access Memory", "B. System Board", "C. Central Processing Unit", "D. Graphics Processing Unit"],
@@ -53,17 +53,17 @@ questions = [
     }
 ]
 
-def load_score():
-    try:
-        with open("scores.json", "r") as f:
-            return json.load(f)
+def load_score():                               #Loads the previous score from the JSON file.
+    try:                                        #Attempts to open and read the file. If an error occurs, it moves to except.
+        with open("scores.json", "r") as f:     #Opens scores.json in read mode.
+            return json.load(f)                 #Reads the JSON file and returns its contents as a Python dictionary.
         
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {"score": 0}    
-    
-def save_score(score):
-    with open("scores.json", "w") as f:
-        json.dump({"score": score}, f)
+    except (FileNotFoundError, json.JSONDecodeError):  #Catches missing file or empty file errors.
+        return {"score": 0}                            #Returns a default score of 0 to keep the return type consistent as a dictionary
+
+def save_score(score):                          #Defines a function that saves the current score as a parameter to know what number to save.
+    with open("scores.json", "w") as f:         #Opens scores.json in write mode. If none exist, creates one.
+        json.dump({"score": score}, f)          #Writes the score to the file as a dictionary in JSON format.
 
 def show_questions():
     score = 0
