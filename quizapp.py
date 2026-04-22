@@ -53,63 +53,63 @@ questions = [      #List of Dictionaries. Each Dictionary holds the question, ch
     }
 ]
 
-def load_score():                               #Loads the previous score from the JSON file.
-    try:                                        #Attempts to open and read the file. If an error occurs, it moves to except.
-        with open("scores.json", "r") as f:     #Opens scores.json in read mode.
-            return json.load(f)                 #Reads the JSON file and returns its contents as a Python dictionary.
+def load_score():                                           #Loads the previous score from the JSON file.
+    try:                                                    #Attempts to open and read the file. If an error occurs, it moves to except.
+        with open("scores.json", "r") as f:                 #Opens scores.json in read mode.
+            return json.load(f)                             #Reads the JSON file and returns its contents as a Python dictionary.
         
-    except (FileNotFoundError, json.JSONDecodeError):  #Catches missing file or empty file errors.
-        return {"score": 0}                            #Returns a default score of 0 to keep the return type consistent as a dictionary
+    except (FileNotFoundError, json.JSONDecodeError):       #Catches missing file or empty file errors.
+        return {"score": 0}                                 #Returns a default score of 0 to keep the return type consistent as a dictionary
 
-def save_score(score):                          #Defines a function that saves the current score as a parameter to know what number to save.
-    with open("scores.json", "w") as f:         #Opens scores.json in write mode. If none exist, creates one.
-        json.dump({"score": score}, f)          #Writes the score to the file as a dictionary in JSON format.
+def save_score(score):                                      #Defines a function that saves the current score as a parameter to know what number to save.
+    with open("scores.json", "w") as f:                     #Opens scores.json in write mode. If none exist, creates one.
+        json.dump({"score": score}, f)                      #Writes the score to the file as a dictionary in JSON format.
 
-def show_questions():
-    score = 0
-    for question in questions:
-        print(question['question'])
-        for choice in question['choices']:
+def show_questions():                                       #Defines a function that runs the quiz and returns the final score.
+    score = 0                                               #Initializes the score to 0 before any questions are answered.
+    for question in questions:                              #Loops through each question dictionary in the questions list.
+        print(question['question'])                 
+        for choice in question['choices']:                  #Loops through each choice in the current question.
             print(choice)
-        while True:
-            answer = input("Enter your answer: ")
-            if answer in ["A", "B", "C", "D"]:
-                break
-            print("Invalid Answer")
+        while True:                                         #Keeps asking for an answer until the user enters a valid one.
+            answer = input("Enter your answer: ")           #Gets the user's answer as input.
+            if answer in ["A", "B", "C", "D"]:              #Checks if the input is a valid choice.
+                break                                       #Exits the validation loop if the answer is valid.
+            print("Invalid Answer")             
 
-        if answer == question['answer']:
-            score += 1
-    return score
+        if answer == question['answer']:                    #Checks if the user's answer matches the correct answer.
+            score += 1                                      #Add plus 1 to the score for every correct answer.
+    return score                                            #Returns the final score after all questions are answered.
 
-def show_results(score):
-    previous_score = load_score()["score"]
-    print(f"Previous Score: {previous_score}/10")
+def show_results(score):                                    #Defines a function that displays the quiz results, accepting the current score as a parameter.
+    previous_score = load_score()["score"]                  #Loads the previous score from the JSON file and extracts the number.
+    print(f"Previous Score: {previous_score}/10")       
     print(f"Score: {score}/10")
-    if previous_score > score:
+    if previous_score > score:                              #If the previous score is higher than the current score.
         print("Nice Try, Keep studying")
-    elif previous_score == score:
+    elif previous_score == score:                           #If both scores are equal.
         print("Keep improving!")
-    else:
+    else:                                                   #If the current score is higher than the previous score.
         print("Great Job!")
-    save_score(score)
+    save_score(score)                                       #Saves the current score to the JSON file for future comparison.
 
-while True:
-    choice = input("Hello, would you like to take a 10-item quiz about Information Technology and Computer Science topics?(Yes/No) ")
-    if choice == "Yes":
-        score = show_questions()
-        show_results(score)
-        while True:
-            again = input("Take the quiz again?(Yes/No): ")
-            if again == "Yes":
-                score = show_questions()
-                show_results(score)
-            elif again == "No":
+while True:                                                 #Keeps the program running until the user chooses to exit.
+    choice = input("Hello, would you like to take a 10-item quiz about Information Technology and Computer Science topics?(Yes/No) ")        #Asks the user if they want to take the quiz.
+    if choice == "Yes":                                     #If the user puts Yes.
+        score = show_questions()                            #Runs the quiz and stores the returned final score.
+        show_results(score)                                 #Displays the results by passing the final score.
+        while True:                                         #Keeps asking if the user wants to retry until they choose to exit.
+            again = input("Take the quiz again?(Yes/No): ")         #Asks the user if they want to take the quiz again.
+            if again == "Yes":                              #If the user wants to retry.
+                score = show_questions()                    #Runs the quiz again and stores the new score.
+                show_results(score)                         #Displays the new results.
+            elif again == "No":                             #If the user chooses to exit.
                 print("Have a great day!")
-                exit()
-            else:
-                print("Invalid choice, please type a valid answer")
-    elif choice == "No":
-        print("Have a great day!")
-        exit()
-    else:
-        print("Invalid choice, please type a valid answer")
+                exit()                                      #Exit the program.
+            else:                                           #If the input is neither Yes nor No.
+                print("Invalid choice, please type a valid answer")   
+    elif choice == "No":                                    #If the user doesn't want to retry.
+        print("Have a great day!")      
+        exit()                                              #Exit the program.
+    else:                                                   #If the input is neither Yes nor No
+        print("Invalid choice, please type a valid answer") 
