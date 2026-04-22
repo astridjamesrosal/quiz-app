@@ -20,3 +20,4 @@ A 10-Item command line quiz app about Information Technology and Computer Scienc
 - I learned writing functions that return values and pass them to other functions
 - I learned to track the scores, save them in the JSON module, and then compare the previous and the current scores.
 - I also learned to handle situations where the file doesn't exist through (FileNotFoundError, json.JSONDecodeError)
+- I added comments beside each line of code to not forget their respective functions.
