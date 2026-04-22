@@ -15,8 +15,8 @@ A 10-Item command line quiz app about Information Technology and Computer Scienc
 - Run: python quizapp.py 
 
 ## What I learned
-- Structuring questions as a list of dictionaries to group related data together
-- Using the JSON module to save and load data between sessions
-- Writing functions that return values and pass them to other functions
-- Implementing score tracking and comparison logic across multiple sessions
-- Handling multiple exceptions with (FileNotFoundError, json.JSONDecodeError)
+- I learned structuring the questions as a list of dictionaries to group related data together. Questions, their choices, and their respective answers.
+- I also used the JSON module to save and load data which are the scores between sessions
+- I learned writing functions that return values and pass them to other functions
+- I learned to track the scores, save them in the JSON module, and then compare the previous and the current scores.
+- I also learned to handle situations where the file doesn't exist through (FileNotFoundError, json.JSONDecodeError)
